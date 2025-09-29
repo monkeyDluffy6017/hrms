@@ -7,7 +7,7 @@
 ## 阶段概览
 
 1. **需求明确** - 模糊想法 → 结构化需求文档
-2. **架构设计** - 需求 → 可落地技术方案  
+2. **架构设计** - 需求 → 可落地技术方案
 3. **任务规划** - 设计方案 → 可执行编码任务
 4. **测试生成** - 任务清单 → 配套测试用例
 
@@ -22,7 +22,7 @@
 **Strict模式适用条件**（满足任一）：
 
 - ✅ 复杂度高，需要系统分析
-- ✅ 涉及架构设计或技术决策  
+- ✅ 涉及架构设计或技术决策
 - ✅ 代码改动量大
 - ✅ 可拆分为多个子任务
 - ✅ 需要详细测试覆盖
@@ -68,7 +68,6 @@
 4. **测试生成阶段** (Test模式)
    - 基于tasks.md生成测试用例
    - 更新测试位置信息到tasks.md
-   - 获得批准后进入实现
 
 ### 阶段间过渡规则
 
@@ -117,7 +116,7 @@
 - 提供模板文档参考
 - 在内容结构和格式上提任何要求
 
-### 必须行为  
+### 必须行为
 
 - 每个阶段前确认用户补充需求
 - 阶段完成后明确告知进度
@@ -128,14 +127,14 @@
 ### 内容约束
 
 #### 需求明确阶段
-  
+
 - 需求文档中不包含：
   - 非功能性需求
   - 测试需求
   - 部署需求
-  
+
 ### 架构设计阶段
-  
+
 - 设计文档中不包含：
   - 具体的代码实现和示例
   - 非功能性设计
@@ -146,7 +145,7 @@
   - 部署设计
 
 ### 任务规划阶段
-  
+
 - 任务规划文档中不包含：
   - 工作量估算和时间排期
   - 任务概述
@@ -198,49 +197,49 @@
 ```mermaid
 stateDiagram-v2
   [*] --> DemandAssessment : 接收用户需求
-  
+
   state 需求评估 <<choice>>
   state Strict模式 <<compound>>
   state Vibe模式 <<compound>>
-  
+
   DemandAssessment : 评估需求复杂度
   DemandAssessment --> 需求评估
-  
+
   需求评估 --> Strict模式 : 复杂需求
   需求评估 --> Vibe模式 : 简单需求
-  
+
   state Strict模式 {
       [*] --> Requirements : 阶段1：需求明确
-      
+
       Requirements : 编写需求文档
       Design : 阶段2： 架构设计
-      Tasks : 阶段3： 任务规划  
+      Tasks : 阶段3： 任务规划
       Tests : 阶段4： 生成测试
-      
+
       Requirements --> ReviewReq : 完成需求
       ReviewReq --> Requirements : 反馈/请求更改
       ReviewReq --> Design : 明确批准
-      
+
       Design --> ReviewDesign : 完成设计
       ReviewDesign --> Design : 反馈/请求更改
       ReviewDesign --> Tasks : 明确批准
-      
+
       Tasks --> ReviewTasks : 完成任务
       ReviewTasks --> Tasks : 反馈/请求更改
       ReviewTasks --> Tests : 明确批准
-      
+
       Tests --> ReviewTests : 完成测试生成
       ReviewTests --> Tests : 反馈/请求更改
       ReviewTests --> [*] : 明确批准
   }
-  
+
   state Vibe模式 {
       [*] --> DirectImplementation : 直接编码实现
       DirectImplementation --> CodeReview : 完成编码
       CodeReview --> DirectImplementation : 需要修改
       CodeReview --> [*] : 验收通过
   }
-  
+
   Strict模式 --> [*] : 完成四阶段
   Vibe模式 --> [*] : 完成实现
 ```
@@ -250,6 +249,6 @@ stateDiagram-v2
 收到需求后，请按以下顺序执行：
 
 1. 自动评估复杂度
-2. 选择合适路径  
+2. 选择合适路径
 3. 开始阶段流程
 4. 严格遵循阶段规则
