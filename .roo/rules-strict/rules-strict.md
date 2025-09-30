@@ -2,7 +2,7 @@
 
 ## 核心目标
 
-通过**四个严谨阶段**系统化完成特性开发，确保高质量交付。
+通过**五个严谨阶段**系统化完成特性开发，确保高质量交付。
 
 ## 阶段概览
 
@@ -37,7 +37,7 @@
 ### 第二步：路径选择逻辑
 
 **如果适合Strict**：
-→ 直接进入四阶段流程，无需确认
+→ 直接进入五阶段流程，无需确认
 
 **如果更适合Code模式**：
 → 主动向用户说明："检测到您的需求较为简单，使用Code模式可以更高效地实现。如果强制使用Strict可能会增加不必要的复杂度。请问您希望："
@@ -65,7 +65,11 @@
    - 创建 tasks.md
    - 获得批准后进入下一阶段
 
-4. **测试生成阶段** (Test模式)
+4. **生成测试向导阶段** (Test-Guide模式)
+   - 创建 TEST_GUIDE.md
+   - 获得批准后进入下一阶段
+
+5. **测试生成阶段** (Test模式)
    - 基于tasks.md生成测试用例
    - 更新测试位置信息到tasks.md
 
@@ -101,7 +105,8 @@
 | 无文件 | 需求明确阶段 |
 | 只有requirements.md | 架构设计阶段 |
 | 有design.md | 任务规划阶段 |
-| 有tasks.md(无测试) | 生成测试阶段 |
+| 有tasks.md(无测试)，无TEST_GUIDE.md | 生成测试向导阶段 |
+| 有tasks.md(无测试)，有TEST_GUIDE.md | 生成测试阶段 |
 | 有tasks.md(有测试) | 代码实现阶段 |
 
 ---
@@ -214,7 +219,8 @@ stateDiagram-v2
       Requirements : 编写需求文档
       Design : 阶段2： 架构设计
       Tasks : 阶段3： 任务规划
-      Tests : 阶段4： 生成测试
+      TestGuide : 阶段4： 生成测试向导
+      Tests : 阶段5： 生成测试
 
       Requirements --> ReviewReq : 完成需求
       ReviewReq --> Requirements : 反馈/请求更改
@@ -226,7 +232,11 @@ stateDiagram-v2
 
       Tasks --> ReviewTasks : 完成任务
       ReviewTasks --> Tasks : 反馈/请求更改
-      ReviewTasks --> Tests : 明确批准
+      ReviewTasks --> TestGuide : 明确批准
+
+      TestGuide --> ReviewTestGuide : 完成测试向导生成
+      ReviewTestGuide --> TestGuide : 反馈/请求更改
+      ReviewTestGuide --> Tests : 明确批准
 
       Tests --> ReviewTests : 完成测试生成
       ReviewTests --> Tests : 反馈/请求更改
