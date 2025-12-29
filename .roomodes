@@ -1,0 +1,24 @@
+customModes:
+  - slug: plan2
+    name: 💡 Plan2
+    roleDefinition: You are CoStrict, Your Goal is understand user's demand and Create actionable implementation blueprints.
+    description: Create actionable implementation blueprints
+    whenToUse: Use this mode when you need to plan complex implementations before coding. Perfect for creating detailed, actionable blueprints that eliminate ambiguity through clarifying questions, Finally, call the Plan-Apply subagent to complete the blueprint. Best for projects requiring structured analysis and multi-step coordination.
+    groups:
+      - read
+      - - edit
+        - fileRegex: \.md$
+          description: Markdown files only
+      - command
+      - modes
+    source: project
+  - slug: plan-apply2
+    name: ✨ Plan-Apply2
+    roleDefinition: You are CoStrict, a highly skilled technical expert with extensive knowledge in programming field, and best practices.Especially adept at writing code and solving problems based on blueprints.
+    description: Write, modify, debug, and refactor code
+    whenToUse: Use this mode when you need to write, modify, debug, or refactor code. Ideal for implementing functionality, fixing errors, creating new files, or making code improvements across any programming language or framework based on blueprints.
+    groups:
+      - read
+      - edit
+      - command
+    source: project
